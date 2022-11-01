@@ -22,6 +22,8 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity android:name=".ActivityInputInfo" android:label="회원 추가" />
+        <activity android:name=".ActivitySearchInfo" android:label="회원 조회" />
     </application>
 
 </manifest>
