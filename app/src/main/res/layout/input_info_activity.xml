@@ -36,7 +36,8 @@
             <EditText
                 android:layout_row="0"
                 android:layout_column="2"
-                android:layout_width="match_parent" />
+                android:layout_width="match_parent"
+                android:id="@+id/EditTextName"/>
             <TextView
                 android:layout_row="1"
                 android:layout_column="0"
@@ -50,7 +51,8 @@
             <EditText
                 android:layout_row="1"
                 android:layout_column="2"
-                android:layout_width="match_parent" />
+                android:layout_width="match_parent"
+                android:id="@+id/EditTextPhone"/>
         </GridLayout>
 
     </LinearLayout>
