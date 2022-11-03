@@ -13,7 +13,7 @@ public class ActivitySearchInfo extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.search_info_activity);
 
-        Button buttonReturn = (Button) findViewById(R.id.ButtonReturn);
+        Button buttonReturn = (Button) findViewById(R.id.ButtonReturn); //뒤로가기 버튼 이벤트
         buttonReturn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

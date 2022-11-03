@@ -19,7 +19,7 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        Button buttonInputInfo = (Button) findViewById(R.id.ButtonInputInfo);
+        Button buttonInputInfo = (Button) findViewById(R.id.ButtonInputInfo); //회원추가 버튼 이벤트
         buttonInputInfo.setOnClickListener(new View.OnClickListener() {
             public void onClick(View view) {
                 Intent intent = new Intent(getApplicationContext(), ActivityInputInfo.class);
@@ -27,7 +27,7 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        Button buttonSearchInfo = (Button) findViewById(R.id.ButtonSearchInfo);
+        Button buttonSearchInfo = (Button) findViewById(R.id.ButtonSearchInfo); //회원 조회 버튼 이벤트
         buttonSearchInfo.setOnClickListener(new View.OnClickListener() {
             public void onClick(View view) {
                 Intent intent = new Intent(getApplicationContext(), ActivitySearchInfo.class);
