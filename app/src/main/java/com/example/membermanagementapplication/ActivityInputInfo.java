@@ -5,6 +5,7 @@ import android.app.AlertDialog;
 import android.content.ContentValues;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.os.Bundle;
@@ -30,7 +31,9 @@ import java.util.Calendar;
 public class ActivityInputInfo extends Activity {
     int selectYear, selectMonth, selectDay;
     TextView textViewYear, textViewMonth, textViewDay;
-    String name, phone, gender, birthdayYear, birthdayMonth, birthdayDay, info, fileName;
+    String gender;
+    MainActivity.myDBHelper myHelper = ((MainActivity)MainActivity.context_main).myHelper;
+    SQLiteDatabase sqlDB = ((MainActivity)MainActivity.context_main).sqlDB;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -93,30 +96,14 @@ public class ActivityInputInfo extends Activity {
         RadioButton radioButtonFemale = (RadioButton) findViewById(R.id.RadioButtonFemale);
         EditText editTextInfo = (EditText) findViewById(R.id.editTextInfo);
         Button buttonInputInfo = (Button) findViewById(R.id.ButtonInputInfo);
-        TextView textViewTest = (TextView) findViewById(R.id.TextViewTest);
+
         buttonInputInfo.setOnClickListener(new View.OnClickListener() { //회원정보 등록 버튼 이벤트
             @Override
             public void onClick(View view) {
-                name = editTextName.getText().toString();
-                phone = editTextPhone.getText().toString();
-                birthdayYear = textViewYear.getText().toString();
-                birthdayMonth = textViewMonth.getText().toString();
-                birthdayDay = textViewDay.getText().toString();
-                info = editTextInfo.getText().toString();
-                if((name == null || name.isEmpty()) || (phone == null || phone.isEmpty()) || (gender == null || gender.isEmpty()) || (birthdayYear.equals("0000") || birthdayYear.equals("0")) || (birthdayMonth.equals("00") || birthdayMonth.equals("0")) || (birthdayDay.equals("00") || birthdayDay.equals("0")) || info == null || info.isEmpty()) {
-                    Toast.makeText(getApplicationContext(), "미입력된 항목 존재", Toast.LENGTH_SHORT).show(); //미입력 항목 존재 시 토스트 띄움
-                }
-                else { //실제 회원정보 등록 이벤트 처리 내용
-                    fileName = name + ".txt";
-                    try {
-                        FileOutputStream outFs = openFileOutput(fileName, Context.MODE_PRIVATE);
-                        String str = name + "/" + phone + "/" + gender + "/" + birthdayYear + "/" + birthdayMonth + "/" + birthdayDay + "/" + info;
-                        outFs.write(str.getBytes());
-                        outFs.close();
-                        Toast.makeText(getApplicationContext(), "저장 완료", Toast.LENGTH_SHORT).show();
-                    } catch (IOException e) { }
-
-                }
+                sqlDB = myHelper.getWritableDatabase();
+                sqlDB.execSQL("INSERT INTO groupTBL VALUES ( '" + editTextName.getText().toString() + "' , " + editTextPhone.getText().toString() + ");");
+                sqlDB.close();
+                Toast.makeText(getApplicationContext(), "추가 완료", Toast.LENGTH_SHORT).show();
             }
         });
 
@@ -134,4 +121,5 @@ public class ActivityInputInfo extends Activity {
             }
         });
     }
+
 }
