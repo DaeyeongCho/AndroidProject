@@ -8,6 +8,7 @@ import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.os.Bundle;
 import android.os.Environment;
+import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
@@ -22,7 +23,6 @@ import java.util.List;
 public class ActivitySearchInfo extends Activity {
     MainActivity.myDBHelper myHelper = ((MainActivity)MainActivity.context_main).myHelper;
     SQLiteDatabase sqlDB = ((MainActivity)MainActivity.context_main).sqlDB;
-    Button btn;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -36,7 +36,6 @@ public class ActivitySearchInfo extends Activity {
                 finish();
             }
         });
-        TextView test = (TextView) findViewById(R.id.test);
         TextView textViewName = (TextView) findViewById(R.id.TextViewName);
         TextView textViewPhone = (TextView) findViewById(R.id.TextViewPhone);
 
@@ -45,13 +44,18 @@ public class ActivitySearchInfo extends Activity {
         cursor = sqlDB.rawQuery("SELECT * FROM groupTBL;", null);
 
         while (cursor.moveToNext()) {
-            btn = new Button(this);
+            Button btn = new Button(this);
             btn.setText(cursor.getString(0));
+            btn.setId(cursor.getPosition());
+            int position = cursor.getPosition();
             btn.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    String myText = btn.getText().toString();
-                    Toast.makeText(getApplicationContext(), myText, Toast.LENGTH_SHORT).show();
+                    Log.d("log", "position :" + position);
+                    int y = position;
+                    cursor.moveToPosition(position);
+                    textViewName.setText(cursor.getString(0));
+                    textViewPhone.setText(cursor.getString(1));
                 }
             });
             linearLayoutScrollButtonAdd.addView(btn);
