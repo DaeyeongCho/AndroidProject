@@ -38,6 +38,9 @@ public class ActivitySearchInfo extends Activity {
         });
         TextView textViewName = (TextView) findViewById(R.id.TextViewName);
         TextView textViewPhone = (TextView) findViewById(R.id.TextViewPhone);
+        TextView textViewGender = (TextView) findViewById(R.id.TextViewGender);
+        TextView textViewBirthday = (TextView) findViewById(R.id.TextViewBirthday);
+        TextView textViewInfo = (TextView) findViewById(R.id.textViewInfo);
 
         sqlDB = myHelper.getReadableDatabase();
         Cursor cursor;
@@ -56,6 +59,9 @@ public class ActivitySearchInfo extends Activity {
                     cursor.moveToPosition(position);
                     textViewName.setText(cursor.getString(0));
                     textViewPhone.setText(cursor.getString(1));
+                    textViewGender.setText(cursor.getString(2));
+                    textViewBirthday.setText(cursor.getString(3));
+                    textViewInfo.setText(cursor.getString(4));
                 }
             });
             linearLayoutScrollButtonAdd.addView(btn);

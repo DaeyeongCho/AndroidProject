@@ -31,7 +31,7 @@ import java.util.Calendar;
 public class ActivityInputInfo extends Activity {
     int selectYear, selectMonth, selectDay;
     TextView textViewYear, textViewMonth, textViewDay;
-    String gender;
+    String gender, birthdayYMD;
     MainActivity.myDBHelper myHelper = ((MainActivity)MainActivity.context_main).myHelper;
     SQLiteDatabase sqlDB = ((MainActivity)MainActivity.context_main).sqlDB;
 
@@ -100,8 +100,9 @@ public class ActivityInputInfo extends Activity {
         buttonInputInfo.setOnClickListener(new View.OnClickListener() { //회원정보 등록 버튼 이벤트
             @Override
             public void onClick(View view) {
+                birthdayYMD = selectYear + "년 " + selectMonth + "월 " + selectDay + "일";
                 sqlDB = myHelper.getWritableDatabase();
-                sqlDB.execSQL("INSERT INTO groupTBL VALUES ( '" + editTextName.getText().toString() + "' , " + editTextPhone.getText().toString() + ");");
+                sqlDB.execSQL("INSERT INTO groupTBL VALUES ( '" + editTextName.getText().toString() + "' , " + editTextPhone.getText().toString() + " , '" + gender + "' , '" + birthdayYMD + "' , '" + editTextInfo.getText().toString() + "');");
                 sqlDB.close();
                 Toast.makeText(getApplicationContext(), "추가 완료", Toast.LENGTH_SHORT).show();
             }
