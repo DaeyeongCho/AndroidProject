@@ -1,7 +1,9 @@
 package com.example.membermanagementapplication;
 
 import android.app.Activity;
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
@@ -67,16 +69,28 @@ public class ActivitySearchInfo extends Activity {
             linearLayoutScrollButtonAdd.addView(btn);
         }
 
-        Button buttonDeleteMember = (Button) findViewById(R.id.buttonDeleteMember); //회원정보 삭제 이벤트
+        final Button buttonDeleteMember = (Button) findViewById(R.id.buttonDeleteMember); //회원정보 삭제 이벤트
         buttonDeleteMember.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                sqlDB.execSQL("DELETE FROM groupTBL WHERE gName = '" + cursor.getString(0) + "';");
-                Intent intent = getIntent();
-                finish();
-                overridePendingTransition(0, 0);
-                startActivity(intent);
-                overridePendingTransition(0, 0);
+                AlertDialog.Builder dlg = new AlertDialog.Builder(ActivitySearchInfo.this);
+                dlg.setTitle("경고!!");
+                dlg.setMessage("정말 삭제하시겠습니까?");
+                dlg.setIcon(R.drawable.warning_icon);
+                dlg.setPositiveButton("확인", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        sqlDB.execSQL("DELETE FROM groupTBL WHERE gName = '" + cursor.getString(0) + "';");
+                        Intent intent = getIntent();
+                        finish();
+                        overridePendingTransition(0, 0);
+                        startActivity(intent);
+                        overridePendingTransition(0, 0);
+                        Toast.makeText(getApplicationContext(), "삭제 완료", Toast.LENGTH_SHORT).show();
+                    }
+                });
+                dlg.setNegativeButton("취소", null);
+                dlg.show();
             }
         });
     }
