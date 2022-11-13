@@ -36,7 +36,7 @@ public class ActivitySearchInfo extends Activity {
                 finish();
             }
         });
-        TextView textViewName = (TextView) findViewById(R.id.TextViewName);
+        TextView textViewName = (TextView) findViewById(R.id.TextViewName); //회원 정보 표현하는 뷰들
         TextView textViewPhone = (TextView) findViewById(R.id.TextViewPhone);
         TextView textViewGender = (TextView) findViewById(R.id.TextViewGender);
         TextView textViewBirthday = (TextView) findViewById(R.id.TextViewBirthday);
@@ -46,7 +46,7 @@ public class ActivitySearchInfo extends Activity {
         Cursor cursor;
         cursor = sqlDB.rawQuery("SELECT * FROM groupTBL;", null);
 
-        while (cursor.moveToNext()) {
+        while (cursor.moveToNext()) { //회원 버튼 생성 및 동작
             Button btn = new Button(this);
             btn.setText(cursor.getString(0));
             btn.setId(cursor.getPosition());
@@ -66,5 +66,18 @@ public class ActivitySearchInfo extends Activity {
             });
             linearLayoutScrollButtonAdd.addView(btn);
         }
+
+        Button buttonDeleteMember = (Button) findViewById(R.id.buttonDeleteMember); //회원정보 삭제 이벤트
+        buttonDeleteMember.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                sqlDB.execSQL("DELETE FROM groupTBL WHERE gName = '" + cursor.getString(0) + "';");
+                Intent intent = getIntent();
+                finish();
+                overridePendingTransition(0, 0);
+                startActivity(intent);
+                overridePendingTransition(0, 0);
+            }
+        });
     }
 }
