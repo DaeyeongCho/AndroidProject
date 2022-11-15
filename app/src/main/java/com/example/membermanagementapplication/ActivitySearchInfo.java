@@ -73,24 +73,34 @@ public class ActivitySearchInfo extends Activity {
         buttonDeleteMember.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                AlertDialog.Builder dlg = new AlertDialog.Builder(ActivitySearchInfo.this);
-                dlg.setTitle("경고!!");
-                dlg.setMessage("정말 삭제하시겠습니까?");
-                dlg.setIcon(R.drawable.warning_icon);
-                dlg.setPositiveButton("확인", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialogInterface, int i) {
-                        sqlDB.execSQL("DELETE FROM groupTBL WHERE gName = '" + cursor.getString(0) + "';");
-                        Intent intent = getIntent();
-                        finish();
-                        overridePendingTransition(0, 0);
-                        startActivity(intent);
-                        overridePendingTransition(0, 0);
-                        Toast.makeText(getApplicationContext(), "삭제 완료", Toast.LENGTH_SHORT).show();
-                    }
-                });
-                dlg.setNegativeButton("취소", null);
-                dlg.show();
+                if(textViewName.getText().toString().isEmpty()) { //회원정보 미지정 상태 삭제 시 예외처리
+                    AlertDialog.Builder dlg = new AlertDialog.Builder(ActivitySearchInfo.this);
+                    dlg.setTitle("경고!!");
+                    dlg.setMessage("삭제 할 회원정보가 없거나 지정되지 않았습니다.");
+                    dlg.setIcon(R.drawable.warning_icon);
+                    dlg.setPositiveButton("확인", null);
+                    dlg.show();
+                }
+                else {
+                    AlertDialog.Builder dlg = new AlertDialog.Builder(ActivitySearchInfo.this);
+                    dlg.setTitle("경고!!");
+                    dlg.setMessage("정말 삭제하시겠습니까?");
+                    dlg.setIcon(R.drawable.warning_icon);
+                    dlg.setPositiveButton("확인", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialogInterface, int i) {
+                            sqlDB.execSQL("DELETE FROM groupTBL WHERE gName = '" + cursor.getString(0) + "';");
+                            Intent intent = getIntent();
+                            finish();
+                            overridePendingTransition(0, 0);
+                            startActivity(intent);
+                            overridePendingTransition(0, 0);
+                            Toast.makeText(getApplicationContext(), "삭제 완료", Toast.LENGTH_SHORT).show();
+                        }
+                    });
+                    dlg.setNegativeButton("취소", null);
+                    dlg.show();
+                }
             }
         });
     }

@@ -101,10 +101,15 @@ public class ActivityInputInfo extends Activity {
             @Override
             public void onClick(View view) {
                 birthdayYMD = selectYear + "년 " + selectMonth + "월 " + selectDay + "일";
-                sqlDB = myHelper.getWritableDatabase();
-                sqlDB.execSQL("INSERT INTO groupTBL VALUES ( '" + editTextName.getText().toString() + "' , " + editTextPhone.getText().toString() + " , '" + gender + "' , '" + birthdayYMD + "' , '" + editTextInfo.getText().toString() + "');");
-                sqlDB.close();
-                Toast.makeText(getApplicationContext(), "추가 완료", Toast.LENGTH_SHORT).show();
+                if(editTextName.getText().toString().isEmpty() ||  editTextPhone.getText().toString().isEmpty() || (gender == null || gender.isEmpty()) || birthdayYMD.equals("0년 0월 0일") || editTextInfo.getText().toString().isEmpty()) {
+                    Toast.makeText(getApplicationContext(), "미입력된 항목 존재", Toast.LENGTH_SHORT).show(); //미입력 항목 존재 시 예외처리
+                }
+                else {
+                    sqlDB = myHelper.getWritableDatabase();
+                    sqlDB.execSQL("INSERT INTO groupTBL VALUES ( '" + editTextName.getText().toString() + "' , " + editTextPhone.getText().toString() + " , '" + gender + "' , '" + birthdayYMD + "' , '" + editTextInfo.getText().toString() + "');");
+                    sqlDB.close();
+                    Toast.makeText(getApplicationContext(), "추가 완료", Toast.LENGTH_SHORT).show();
+                }
             }
         });
 
