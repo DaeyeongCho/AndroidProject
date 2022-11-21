@@ -8,12 +8,14 @@ import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
+import android.media.Image;
 import android.os.Bundle;
 import android.os.Environment;
 import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -43,6 +45,8 @@ public class ActivitySearchInfo extends Activity {
         TextView textViewGender = (TextView) findViewById(R.id.TextViewGender);
         TextView textViewBirthday = (TextView) findViewById(R.id.TextViewBirthday);
         TextView textViewInfo = (TextView) findViewById(R.id.textViewInfo);
+        ImageView imageViewProfile = (ImageView) findViewById(R.id.ImageViewProfile);
+        Integer pictureSrc[] = { R.drawable.profile1, R.drawable.profile2, R.drawable.profile3, R.drawable.profile4, R.drawable.profile5, R.drawable.profile6, R.drawable.profile7, R.drawable.profile8 };
 
         sqlDB = myHelper.getReadableDatabase();
         Cursor cursor;
@@ -64,6 +68,7 @@ public class ActivitySearchInfo extends Activity {
                     textViewGender.setText(cursor.getString(2));
                     textViewBirthday.setText(cursor.getString(3));
                     textViewInfo.setText(cursor.getString(4));
+                    imageViewProfile.setImageResource(pictureSrc[cursor.getInt(5)]);
                 }
             });
             linearLayoutScrollButtonAdd.addView(btn);

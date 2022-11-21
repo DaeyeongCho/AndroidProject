@@ -14,6 +14,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
@@ -30,6 +31,7 @@ import java.util.Calendar;
 
 public class ActivityInputInfo extends Activity {
     int selectYear, selectMonth, selectDay;
+    int selectPicture = -1;
     TextView textViewYear, textViewMonth, textViewDay;
     String gender, birthdayYMD;
     MainActivity.myDBHelper myHelper = ((MainActivity)MainActivity.context_main).myHelper;
@@ -46,6 +48,28 @@ public class ActivityInputInfo extends Activity {
             @Override
             public void onClick(View view) {
                 finish();
+            }
+        });
+
+        ImageView imageViewProfilePicture = (ImageView) findViewById(R.id.ImageViewProfile); //이미지 선택 이벤트
+        imageViewProfilePicture.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Integer pictureSrc[] = { R.drawable.profile1, R.drawable.profile2, R.drawable.profile3, R.drawable.profile4, R.drawable.profile5, R.drawable.profile6, R.drawable.profile7, R.drawable.profile8 };
+                final String[] pictureArray = new String[] { "수의사(남자)", "수의사(여자)", "간호사(남자)", "간호사(여자)", "농부(여자)", "농부(남자)", "엔지니어(여자)", "엔지니어(남자)" };
+                AlertDialog.Builder dlg = new AlertDialog.Builder(ActivityInputInfo.this);
+                dlg.setTitle("프로필 사진 선택");
+                dlg.setSingleChoiceItems(pictureArray, 0, new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        imageViewProfilePicture.setImageResource(pictureSrc[i]);
+                        selectPicture = i;
+                    }
+                });
+
+                dlg.setPositiveButton("확인", null);
+                dlg.setNegativeButton("취소", null);
+                dlg.show();
             }
         });
 
@@ -101,12 +125,12 @@ public class ActivityInputInfo extends Activity {
             @Override
             public void onClick(View view) {
                 birthdayYMD = selectYear + "년 " + selectMonth + "월 " + selectDay + "일";
-                if(editTextName.getText().toString().isEmpty() ||  editTextPhone.getText().toString().isEmpty() || (gender == null || gender.isEmpty()) || birthdayYMD.equals("0년 0월 0일") || editTextInfo.getText().toString().isEmpty()) {
+                if(editTextName.getText().toString().isEmpty() ||  editTextPhone.getText().toString().isEmpty() || (gender == null || gender.isEmpty()) || birthdayYMD.equals("0년 0월 0일") || editTextInfo.getText().toString().isEmpty() || selectPicture == -1) {
                     Toast.makeText(getApplicationContext(), "미입력된 항목 존재", Toast.LENGTH_SHORT).show(); //미입력 항목 존재 시 예외처리
                 }
                 else {
                     sqlDB = myHelper.getWritableDatabase();
-                    sqlDB.execSQL("INSERT INTO groupTBL VALUES ( '" + editTextName.getText().toString() + "' , " + editTextPhone.getText().toString() + " , '" + gender + "' , '" + birthdayYMD + "' , '" + editTextInfo.getText().toString() + "');");
+                    sqlDB.execSQL("INSERT INTO groupTBL VALUES ( '" + editTextName.getText().toString() + "' , " + editTextPhone.getText().toString() + " , '" + gender + "' , '" + birthdayYMD + "' , '" + editTextInfo.getText().toString() + "' , '" + selectPicture + "');");
                     sqlDB.close();
                     Toast.makeText(getApplicationContext(), "추가 완료", Toast.LENGTH_SHORT).show();
                 }

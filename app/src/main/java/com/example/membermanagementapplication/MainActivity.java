@@ -92,7 +92,7 @@ public class MainActivity extends AppCompatActivity {
 
         @Override
         public void onCreate(SQLiteDatabase db) {
-            db.execSQL("CREATE TABLE groupTBL (gName CHAR(20) PRIMARY KEY, gPhone INTEGER, gGender CHAR(20), gBirthday CHAR(20), gInfo CHAR(200));");
+            db.execSQL("CREATE TABLE groupTBL (gName CHAR(20) PRIMARY KEY, gPhone CHAR(20), gGender CHAR(20), gBirthday CHAR(20), gInfo CHAR(200), gPicture INTEGER);");
         }
 
         @Override
