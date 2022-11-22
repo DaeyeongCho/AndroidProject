@@ -81,6 +81,10 @@ public class MainActivity extends AppCompatActivity {
                 dlg.setNegativeButton("취소", null);
                 dlg.show();
                 return true;
+
+            case R.id.itemShowManual:
+                Intent intent = new Intent(getApplicationContext(), Explanation.class);
+                startActivity(intent);
         }
         return false;
     }

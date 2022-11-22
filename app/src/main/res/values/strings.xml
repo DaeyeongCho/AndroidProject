@@ -1,3 +1,21 @@
 <resources>
     <string name="app_name">회원 관리 앱</string>
+
+    <array name="app_image">
+        <item>@drawable/app_ex1</item>
+        <item>@drawable/app_ex2</item>
+        <item>@drawable/app_ex3</item>
+        <item>@drawable/app_ex4</item>
+        <item>@drawable/app_ex5</item>
+        <item>@drawable/app_ex6</item>
+        <item>@drawable/app_ex7</item>
+        <item>@drawable/app_ex8</item>
+        <item>@drawable/app_ex9</item>
+        <item>@drawable/app_ex10</item>
+        <item>@drawable/app_ex11</item>
+        <item>@drawable/app_ex12</item>
+        <item>@drawable/app_ex13</item>
+        <item>@drawable/app_ex14</item>
+    </array>
+
 </resources>

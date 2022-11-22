@@ -4,5 +4,9 @@
     <item
         android:id="@+id/itemInitialization"
         android:title="초기화" />
+    <item
+        android:id="@+id/itemShowManual"
+        android:title="사용설명" />
+
 
 </menu>
