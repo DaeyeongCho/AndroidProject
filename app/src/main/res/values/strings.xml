@@ -16,6 +16,10 @@
         <item>@drawable/app_ex12</item>
         <item>@drawable/app_ex13</item>
         <item>@drawable/app_ex14</item>
+        <item>@drawable/app_ex15</item>
+        <item>@drawable/app_ex16</item>
+        <item>@drawable/app_ex17</item>
+        <item>@drawable/app_ex18</item>
     </array>
 
 </resources>
