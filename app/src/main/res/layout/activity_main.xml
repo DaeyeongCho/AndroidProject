@@ -13,7 +13,7 @@
         android:layout_height="wrap_content"
         android:orientation="vertical"
         android:layout_margin="20dp"
-        android:background="#F8F8F8">
+        android:background="#FAFAFA">
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -24,6 +24,24 @@
             android:id="@+id/editTextMemo"
             android:lines="10"
             android:background="#EEEEEE" />
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center">
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="메모 저장하기"
+                android:id="@+id/ButtonMemoSave"
+                android:layout_margin="5dp"/>
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="메모 가져오기"
+                android:id="@+id/ButtonMemoRoad"
+                android:layout_margin="5dp"/>
+        </LinearLayout>
     </LinearLayout>
 
     <LinearLayout

@@ -11,6 +11,8 @@ import android.content.Intent;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -22,6 +24,10 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.material.tabs.TabLayout;
+
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.IOException;
 
 public class MainActivity extends AppCompatActivity {
     public static Context context_main;
@@ -51,6 +57,39 @@ public class MainActivity extends AppCompatActivity {
         });
 
         myHelper = new myDBHelper(this);
+
+        EditText editTextMemo = (EditText) findViewById(R.id.editTextMemo);
+        Button buttonMemoSave = (Button) findViewById(R.id.ButtonMemoSave);
+        Button buttonMemoRoad = (Button) findViewById(R.id.ButtonMemoRoad);
+        buttonMemoSave.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                try {
+                    FileOutputStream outFs = openFileOutput("memo.txt", Context.MODE_PRIVATE);
+                    String str = editTextMemo.getText().toString();
+                    outFs.write(str.getBytes());
+                    outFs.close();
+                    Toast.makeText(getApplicationContext(), "메모를 저장했어요!", Toast.LENGTH_SHORT).show();
+                }
+                catch (IOException e) { }
+            }
+        });
+
+        buttonMemoRoad.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                try {
+                    FileInputStream inFs = openFileInput("memo.txt");
+                    byte[] txt = new byte[200];
+                    inFs.read(txt);
+                    String srt = new String(txt);
+                    editTextMemo.setText(srt);
+                    inFs.close();
+                    Toast.makeText(getApplicationContext(), "메모를 불러왔어요!", Toast.LENGTH_SHORT).show();
+                }
+                catch (IOException e) { }
+            }
+        });
     }
 
     @Override
