@@ -102,6 +102,7 @@ public class ActivitySearchInfo extends Activity {
                             sqlDB.execSQL("DELETE FROM groupTBL WHERE gName = '" + cursor.getString(0) + "';");
                             Intent intent = getIntent();
                             finish();
+                            ((MainActivity)MainActivity.context_main).refresh();
                             overridePendingTransition(0, 0);
                             startActivity(intent);
                             overridePendingTransition(0, 0);

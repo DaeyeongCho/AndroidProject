@@ -8,40 +8,33 @@
     android:gravity="center"
     android:orientation="vertical">
 
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="안녕하세요!"
+        android:id="@+id/TextViewSayHello"
+        android:textSize="25dp"
+        android:layout_marginBottom="80dp"/>
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:layout_margin="20dp"
-        android:background="#FAFAFA">
+        android:orientation="horizontal"
+        android:layout_marginBottom="150dp"
+        android:gravity="center">
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="간편 메모장" />
-        <EditText
-            android:layout_width="match_parent"
+            android:text="현재 회원 수: " />
+        <TextView
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:id="@+id/editTextMemo"
-            android:lines="10"
-            android:background="#EEEEEE" />
-        <LinearLayout
-            android:layout_width="fill_parent"
+            android:text="0"
+            android:id="@+id/TextViewHowManyPeople" />
+        <TextView
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:gravity="center">
-            <Button
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="메모 저장하기"
-                android:id="@+id/ButtonMemoSave"
-                android:layout_margin="5dp"/>
-            <Button
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="메모 가져오기"
-                android:id="@+id/ButtonMemoRoad"
-                android:layout_margin="5dp"/>
-        </LinearLayout>
+            android:text="명"/>
     </LinearLayout>
 
     <LinearLayout

@@ -132,6 +132,12 @@ public class ActivityInputInfo extends Activity {
                     sqlDB = myHelper.getWritableDatabase();
                     sqlDB.execSQL("INSERT INTO groupTBL VALUES ( '" + editTextName.getText().toString() + "' , " + editTextPhone.getText().toString() + " , '" + gender + "' , '" + birthdayYMD + "' , '" + editTextInfo.getText().toString() + "' , '" + selectPicture + "');");
                     sqlDB.close();
+                    Intent intent = getIntent();
+                    finish();
+                    ((MainActivity)MainActivity.context_main).refresh();
+                    overridePendingTransition(0, 0);
+                    startActivity(intent);
+                    overridePendingTransition(0, 0);
                     Toast.makeText(getApplicationContext(), "추가 완료", Toast.LENGTH_SHORT).show();
                 }
             }
