@@ -112,6 +112,7 @@ public class MainActivity extends AppCompatActivity {
                         sqlDB = myHelper.getWritableDatabase();
                         myHelper.onUpgrade(sqlDB, 1, 2);
                         sqlDB.close();
+                        refresh();
                         Toast.makeText(getApplicationContext(), "초기화 완료", Toast.LENGTH_SHORT).show();
                     }
                 });
