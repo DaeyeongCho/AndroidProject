@@ -35,6 +35,7 @@ public class MainActivity extends AppCompatActivity {
     public static Context context_main;
     public myDBHelper myHelper;
     public SQLiteDatabase sqlDB;
+    static int e;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -59,6 +60,10 @@ public class MainActivity extends AppCompatActivity {
                 overridePendingTransition(0, 0);
                 startActivity(intent);
                 overridePendingTransition(0, 0);
+                e++;
+                if(e == 100) {
+                    Toast.makeText(getApplicationContext(), "칭호 획득!\n[계란으로 바위치기]", Toast.LENGTH_LONG).show();
+                }
             }
         });
 

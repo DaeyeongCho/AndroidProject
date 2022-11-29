@@ -134,8 +134,8 @@ public class ActivityInputInfo extends Activity {
                     sqlDB.close();
                     Intent intent = getIntent();
                     finish();
-                    ((MainActivity)MainActivity.context_main).refresh();
                     overridePendingTransition(0, 0);
+                    ((MainActivity)MainActivity.context_main).refresh();
                     startActivity(intent);
                     overridePendingTransition(0, 0);
                     Toast.makeText(getApplicationContext(), "추가 완료", Toast.LENGTH_SHORT).show();
